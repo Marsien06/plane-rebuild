@@ -9,6 +9,8 @@ from plane.api.views import (
     IssueDetailAPIEndpoint,
     IssueLinkListCreateAPIEndpoint,
     IssueLinkDetailAPIEndpoint,
+    IssueTimeEntryListCreateAPIEndpoint,
+    IssueTimeEntryDetailAPIEndpoint,
     IssueCommentListCreateAPIEndpoint,
     IssueCommentDetailAPIEndpoint,
     IssueActivityListAPIEndpoint,
@@ -51,6 +53,16 @@ old_url_patterns = [
         "workspaces/<str:slug>/projects/<uuid:project_id>/issues/<uuid:issue_id>/links/<uuid:pk>/",
         IssueLinkDetailAPIEndpoint.as_view(http_method_names=["get", "patch", "delete"]),
         name="link",
+    ),
+    path(
+        "workspaces/<str:slug>/projects/<uuid:project_id>/issues/<uuid:issue_id>/time-entries/",
+        IssueTimeEntryListCreateAPIEndpoint.as_view(http_method_names=["get", "post"]),
+        name="time-entry",
+    ),
+    path(
+        "workspaces/<str:slug>/projects/<uuid:project_id>/issues/<uuid:issue_id>/time-entries/<uuid:pk>/",
+        IssueTimeEntryDetailAPIEndpoint.as_view(http_method_names=["get", "patch", "delete"]),
+        name="time-entry",
     ),
     path(
         "workspaces/<str:slug>/projects/<uuid:project_id>/issues/<uuid:issue_id>/comments/",
@@ -115,6 +127,16 @@ new_url_patterns = [
         "workspaces/<str:slug>/projects/<uuid:project_id>/work-items/<uuid:issue_id>/links/<uuid:pk>/",
         IssueLinkDetailAPIEndpoint.as_view(http_method_names=["get", "patch", "delete"]),
         name="work-item-link-detail",
+    ),
+    path(
+        "workspaces/<str:slug>/projects/<uuid:project_id>/work-items/<uuid:issue_id>/time-entries/",
+        IssueTimeEntryListCreateAPIEndpoint.as_view(http_method_names=["get", "post"]),
+        name="work-item-time-entry-list",
+    ),
+    path(
+        "workspaces/<str:slug>/projects/<uuid:project_id>/work-items/<uuid:issue_id>/time-entries/<uuid:pk>/",
+        IssueTimeEntryDetailAPIEndpoint.as_view(http_method_names=["get", "patch", "delete"]),
+        name="work-item-time-entry-detail",
     ),
     path(
         "workspaces/<str:slug>/projects/<uuid:project_id>/work-items/<uuid:issue_id>/comments/",

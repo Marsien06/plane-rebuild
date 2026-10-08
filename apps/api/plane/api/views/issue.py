@@ -46,6 +46,7 @@ from plane.api.serializers import (
     IssueActivitySerializer,
     IssueCommentSerializer,
     IssueLinkSerializer,
+    IssueTimeEntrySerializer,
     IssueRelationCreateSerializer,
     IssueRelationResponseSerializer,
     IssueRelationSerializer,
@@ -71,6 +72,7 @@ from plane.db.models import (
     FileAsset,
     IssueComment,
     IssueLink,
+    IssueTimeEntry,
     IssueRelation,
     Label,
     Project,
@@ -96,6 +98,7 @@ from plane.utils.openapi import (
     work_item_relation_docs,
     label_docs,
     issue_link_docs,
+    issue_time_entry_docs,
     issue_comment_docs,
     issue_activity_docs,
     issue_attachment_docs,
@@ -107,6 +110,7 @@ from plane.utils.openapi import (
     LABEL_ID_PARAMETER,
     COMMENT_ID_PARAMETER,
     LINK_ID_PARAMETER,
+    TIME_ENTRY_ID_PARAMETER,
     ATTACHMENT_ID_PARAMETER,
     ACTIVITY_ID_PARAMETER,
     PROJECT_ID_QUERY_PARAMETER,
@@ -1361,6 +1365,168 @@ class IssueLinkDetailAPIEndpoint(BaseAPIView):
             epoch=int(timezone.now().timestamp()),
         )
         issue_link.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class IssueTimeEntryListCreateAPIEndpoint(BaseAPIView):
+    """Work Item Time Entry List and Create Endpoint"""
+
+    serializer_class = IssueTimeEntrySerializer
+    model = IssueTimeEntry
+    permission_classes = [ProjectEntityPermission]
+
+    def get_queryset(self):
+        return (
+            IssueTimeEntry.objects.filter(workspace__slug=self.kwargs.get("slug"))
+            .filter(project_id=self.kwargs.get("project_id"))
+            .filter(issue_id=self.kwargs.get("issue_id"))
+            .filter(
+                project__project_projectmember__member=self.request.user,
+                project__project_projectmember__is_active=True,
+            )
+            .filter(project__archived_at__isnull=True)
+            .select_related("workspace", "project", "issue", "user")
+            .order_by("-logged_on", "-created_at")
+            .distinct()
+        )
+
+    @issue_time_entry_docs(
+        operation_id="list_work_item_time_entries",
+        description="Retrieve all time entries tracked on a work item.",
+        parameters=[ISSUE_ID_PARAMETER],
+        responses={
+            200: OpenApiResponse(
+                description="List of work item time entries",
+                response=IssueTimeEntrySerializer,
+            ),
+            404: ISSUE_NOT_FOUND_RESPONSE,
+        },
+    )
+    def get(self, request, slug, project_id, issue_id):
+        """List work item time entries
+
+        Retrieve every time entry logged against a work item, newest first.
+        """
+        serializer = IssueTimeEntrySerializer(self.get_queryset(), many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @issue_time_entry_docs(
+        operation_id="create_work_item_time_entry",
+        description="Log time against a work item.",
+        parameters=[ISSUE_ID_PARAMETER],
+        request=OpenApiRequest(request=IssueTimeEntrySerializer),
+        responses={
+            201: OpenApiResponse(
+                description="Time entry created successfully",
+                response=IssueTimeEntrySerializer,
+            ),
+            400: INVALID_REQUEST_RESPONSE,
+            404: ISSUE_NOT_FOUND_RESPONSE,
+        },
+    )
+    def post(self, request, slug, project_id, issue_id):
+        """Create work item time entry
+
+        Log a duration against a work item. `user` defaults to the API key's
+        user when it is not provided.
+        """
+        data = request.data.copy() if hasattr(request.data, "copy") else dict(request.data)
+        data.setdefault("user", str(request.user.id))
+        serializer = IssueTimeEntrySerializer(data=data)
+        if serializer.is_valid():
+            serializer.save(project_id=project_id, issue_id=issue_id)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class IssueTimeEntryDetailAPIEndpoint(BaseAPIView):
+    """Work Item Time Entry Detail Endpoint"""
+
+    serializer_class = IssueTimeEntrySerializer
+    model = IssueTimeEntry
+    permission_classes = [ProjectEntityPermission]
+
+    def get_queryset(self):
+        return (
+            IssueTimeEntry.objects.filter(workspace__slug=self.kwargs.get("slug"))
+            .filter(project_id=self.kwargs.get("project_id"))
+            .filter(issue_id=self.kwargs.get("issue_id"))
+            .filter(
+                project__project_projectmember__member=self.request.user,
+                project__project_projectmember__is_active=True,
+            )
+            .filter(project__archived_at__isnull=True)
+            .select_related("workspace", "project", "issue", "user")
+            .distinct()
+        )
+
+    @issue_time_entry_docs(
+        operation_id="retrieve_work_item_time_entry",
+        description="Retrieve details of a specific work item time entry.",
+        parameters=[ISSUE_ID_PARAMETER, TIME_ENTRY_ID_PARAMETER],
+        responses={
+            200: OpenApiResponse(
+                description="Work item time entry details",
+                response=IssueTimeEntrySerializer,
+            ),
+            404: ISSUE_NOT_FOUND_RESPONSE,
+        },
+    )
+    def get(self, request, slug, project_id, issue_id, pk):
+        """Retrieve work item time entry
+
+        Retrieve details of a specific work item time entry.
+        """
+        time_entry = self.get_queryset().get(pk=pk)
+        serializer = IssueTimeEntrySerializer(time_entry)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @issue_time_entry_docs(
+        operation_id="update_work_item_time_entry",
+        description="Modify the duration, date, or description of an existing time entry.",
+        parameters=[ISSUE_ID_PARAMETER, TIME_ENTRY_ID_PARAMETER],
+        request=OpenApiRequest(request=IssueTimeEntrySerializer),
+        responses={
+            200: OpenApiResponse(
+                description="Time entry updated successfully",
+                response=IssueTimeEntrySerializer,
+            ),
+            400: INVALID_REQUEST_RESPONSE,
+            404: ISSUE_NOT_FOUND_RESPONSE,
+        },
+    )
+    def patch(self, request, slug, project_id, issue_id, pk):
+        """Update work item time entry
+
+        Modify the duration, date, or description of an existing time entry.
+        """
+        time_entry = IssueTimeEntry.objects.get(
+            workspace__slug=slug, project_id=project_id, issue_id=issue_id, pk=pk
+        )
+        serializer = IssueTimeEntrySerializer(time_entry, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @issue_time_entry_docs(
+        operation_id="delete_work_item_time_entry",
+        description="Permanently remove a time entry from a work item.",
+        parameters=[ISSUE_ID_PARAMETER, TIME_ENTRY_ID_PARAMETER],
+        responses={
+            204: OpenApiResponse(description="Time entry deleted successfully"),
+            404: ISSUE_NOT_FOUND_RESPONSE,
+        },
+    )
+    def delete(self, request, slug, project_id, issue_id, pk):
+        """Delete work item time entry
+
+        Permanently remove a time entry from a work item.
+        """
+        time_entry = IssueTimeEntry.objects.get(
+            workspace__slug=slug, project_id=project_id, issue_id=issue_id, pk=pk
+        )
+        time_entry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

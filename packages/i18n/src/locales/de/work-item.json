@@ -59,6 +59,7 @@
         "issue_type": "Typ des Arbeitselements",
         "sub_issue_count": "Anzahl untergeordneter Elemente",
         "attachment_count": "Anzahl Anhänge",
+        "time_tracked": "Erfasste Zeit",
         "created_on": "Erstellt am",
         "sub_issue": "Untergeordnetes Element",
         "work_item_count": "Anzahl Arbeitselemente"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Klicken zum Runterstimmen",
       "click_to_view_upvotes": "Klicken um Hochstimmen anzuzeigen",
       "click_to_view_downvotes": "Klicken um Runterstimmen anzuzeigen"
+    },
+    "time_tracking": {
+      "log_time": "Zeit erfassen",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Geben Sie eine gültige Dauer ein, z. B. 1h 30m.",
+      "empty": "Noch keine Zeit erfasst.",
+      "toasts": {
+        "logged": "Zeit erfolgreich erfasst.",
+        "not_logged": "Zeit konnte nicht erfasst werden. Versuchen Sie es erneut.",
+        "updated": "Zeiteintrag aktualisiert.",
+        "not_updated": "Zeiteintrag konnte nicht aktualisiert werden.",
+        "removed": "Zeiteintrag entfernt.",
+        "not_removed": "Zeiteintrag konnte nicht entfernt werden."
+      }
     }
   },
   "sub_work_item": {

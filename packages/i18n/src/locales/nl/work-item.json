@@ -59,6 +59,7 @@
         "issue_type": "Type werkitem",
         "sub_issue_count": "Aantal subwerkitems",
         "attachment_count": "Aantal bijlagen",
+        "time_tracked": "Geregistreerde tijd",
         "created_on": "Aangemaakt op",
         "sub_issue": "Subwerkitem",
         "work_item_count": "Aantal werkitems"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Klik om omlaag te stemmen",
       "click_to_view_upvotes": "Klik om positieve stemmen te bekijken",
       "click_to_view_downvotes": "Klik om negatieve stemmen te bekijken"
+    },
+    "time_tracking": {
+      "log_time": "Tijd loggen",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Voer een geldige duur in, bijv. 1h 30m.",
+      "empty": "Nog geen tijd gelogd.",
+      "toasts": {
+        "logged": "Tijd geregistreerd.",
+        "not_logged": "Tijd kon niet worden gelogd. Probeer het opnieuw.",
+        "updated": "Tijdregistratie bijgewerkt.",
+        "not_updated": "Tijdregistratie kon niet worden bijgewerkt.",
+        "removed": "Tijdregistratie verwijderd.",
+        "not_removed": "Tijdregistratie kon niet worden verwijderd."
+      }
     }
   },
   "sub_work_item": {

@@ -40,6 +40,7 @@ from plane.db.models import (
     State,
     IssueVersion,
     IssueDescriptionVersion,
+    IssueTimeEntry,
     ProjectMember,
     EstimatePoint,
 )
@@ -613,6 +614,28 @@ class IssueLinkLiteSerializer(BaseSerializer):
         read_only_fields = fields
 
 
+class IssueTimeEntrySerializer(BaseSerializer):
+    user_detail = UserLiteSerializer(read_only=True, source="user")
+
+    class Meta:
+        model = IssueTimeEntry
+        fields = "__all__"
+        read_only_fields = [
+            "workspace",
+            "project",
+            "issue",
+            "created_by",
+            "updated_by",
+            "created_at",
+            "updated_at",
+        ]
+
+    def validate_duration_seconds(self, value):
+        if value is None or value < 1:
+            raise serializers.ValidationError("Duration must be at least 1 second.")
+        return value
+
+
 class IssueAttachmentSerializer(BaseSerializer):
     asset_url = serializers.CharField(read_only=True)
 
@@ -780,6 +803,7 @@ class IssueSerializer(DynamicBaseSerializer):
     sub_issues_count = serializers.IntegerField(read_only=True)
     attachment_count = serializers.IntegerField(read_only=True)
     link_count = serializers.IntegerField(read_only=True)
+    total_tracked_seconds = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Issue
@@ -807,6 +831,7 @@ class IssueSerializer(DynamicBaseSerializer):
             "updated_by",
             "attachment_count",
             "link_count",
+            "total_tracked_seconds",
             "is_draft",
             "archived_at",
         ]
@@ -867,6 +892,7 @@ class IssueListDetailSerializer(serializers.Serializer):
             "sub_issues_count": instance.sub_issues_count,
             "attachment_count": instance.attachment_count,
             "link_count": instance.link_count,
+            "total_tracked_seconds": getattr(instance, "total_tracked_seconds", 0) or 0,
         }
 
         # Handle expanded fields only when requested - using direct field access

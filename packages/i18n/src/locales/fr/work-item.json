@@ -59,6 +59,7 @@
         "issue_type": "Type d’élément de travail",
         "sub_issue_count": "Nombre de sous-éléments",
         "attachment_count": "Nombre de pièces jointes",
+        "time_tracked": "Temps suivi",
         "created_on": "Créé le",
         "sub_issue": "Sous-élément de travail",
         "work_item_count": "Nombre d’éléments de travail"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Cliquez pour voter contre",
       "click_to_view_upvotes": "Cliquez pour voir les votes pour",
       "click_to_view_downvotes": "Cliquez pour voir les votes contre"
+    },
+    "time_tracking": {
+      "log_time": "Saisir du temps",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Saisissez une durée valide, par ex. 1h 30m.",
+      "empty": "Aucun temps saisi pour l'instant.",
+      "toasts": {
+        "logged": "Temps enregistré avec succès.",
+        "not_logged": "Impossible d'enregistrer le temps. Réessayez.",
+        "updated": "Saisie de temps mise à jour.",
+        "not_updated": "Impossible de mettre à jour la saisie.",
+        "removed": "Saisie de temps supprimée.",
+        "not_removed": "Impossible de supprimer la saisie."
+      }
     }
   },
   "sub_work_item": {

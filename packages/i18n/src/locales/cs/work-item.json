@@ -59,6 +59,7 @@
         "issue_type": "Typ pracovní položky",
         "sub_issue_count": "Počet podřízených položek",
         "attachment_count": "Počet příloh",
+        "time_tracked": "Zaznamenaný čas",
         "created_on": "Vytvořeno dne",
         "sub_issue": "Podřízená položka",
         "work_item_count": "Počet pracovních položek"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Klikněte pro hlasování dolů",
       "click_to_view_upvotes": "Klikněte pro zobrazení hlasů nahoru",
       "click_to_view_downvotes": "Klikněte pro zobrazení hlasů dolů"
+    },
+    "time_tracking": {
+      "log_time": "Zaznamenat čas",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Zadejte platnou dobu, např. 1h 30m.",
+      "empty": "Zatím nebyl zaznamenán žádný čas.",
+      "toasts": {
+        "logged": "Čas byl úspěšně zaznamenán.",
+        "not_logged": "Čas se nepodařilo zaznamenat. Zkuste to znovu.",
+        "updated": "Záznam času byl aktualizován.",
+        "not_updated": "Záznam se nepodařilo aktualizovat.",
+        "removed": "Záznam času byl odebrán.",
+        "not_removed": "Záznam se nepodařilo odebrat."
+      }
     }
   },
   "sub_work_item": {

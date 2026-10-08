@@ -178,6 +178,21 @@ def issue_link_docs(**kwargs):
     return extend_schema(**_merge_schema_options(defaults, kwargs))
 
 
+def issue_time_entry_docs(**kwargs):
+    """Decorator for issue time entry endpoints"""
+    defaults = {
+        "tags": ["Work Item Time Entries"],
+        "parameters": [WORKSPACE_SLUG_PARAMETER, PROJECT_ID_PARAMETER],
+        "responses": {
+            401: UNAUTHORIZED_RESPONSE,
+            403: FORBIDDEN_RESPONSE,
+            404: NOT_FOUND_RESPONSE,
+        },
+    }
+
+    return extend_schema(**_merge_schema_options(defaults, kwargs))
+
+
 def issue_comment_docs(**kwargs):
     """Decorator for issue comment endpoints"""
     defaults = {

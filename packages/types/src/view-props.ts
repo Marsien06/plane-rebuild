@@ -169,6 +169,7 @@ export interface IIssueDisplayProperties {
   sub_issue_count?: boolean;
   link?: boolean;
   attachment_count?: boolean;
+  time_tracked?: boolean;
   estimate?: boolean;
   created_on?: boolean;
   updated_on?: boolean;

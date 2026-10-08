@@ -59,6 +59,7 @@
         "issue_type": "İş Öğesi Türü",
         "sub_issue_count": "Alt iş öğesi sayısı",
         "attachment_count": "Ek sayısı",
+        "time_tracked": "Kaydedilen süre",
         "created_on": "Oluşturulma tarihi",
         "sub_issue": "Alt iş öğesi",
         "work_item_count": "İş öğesi sayısı"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Olumsuz oy vermek için tıklayın",
       "click_to_view_upvotes": "Olumlu oyları görüntülemek için tıklayın",
       "click_to_view_downvotes": "Olumsuz oyları görüntülemek için tıklayın"
+    },
+    "time_tracking": {
+      "log_time": "Süre kaydet",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Geçerli bir süre girin, örn. 1h 30m.",
+      "empty": "Henüz kaydedilmiş süre yok.",
+      "toasts": {
+        "logged": "Süre başarıyla kaydedildi.",
+        "not_logged": "Süre kaydedilemedi. Tekrar deneyin.",
+        "updated": "Süre kaydı güncellendi.",
+        "not_updated": "Süre kaydı güncellenemedi.",
+        "removed": "Süre kaydı silindi.",
+        "not_removed": "Süre kaydı silinemedi."
+      }
     }
   },
   "sub_work_item": {

@@ -59,6 +59,7 @@
         "issue_type": "Tipo di elemento di lavoro",
         "sub_issue_count": "Numero di sotto-elementi di lavoro",
         "attachment_count": "Numero di allegati",
+        "time_tracked": "Tempo registrato",
         "created_on": "Creato il",
         "sub_issue": "Sotto-elemento di lavoro",
         "work_item_count": "Conteggio degli elementi di lavoro"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Clicca per votare contro",
       "click_to_view_upvotes": "Clicca per vedere i voti a favore",
       "click_to_view_downvotes": "Clicca per vedere i voti contro"
+    },
+    "time_tracking": {
+      "log_time": "Registra tempo",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Inserisci una durata valida, es. 1h 30m.",
+      "empty": "Nessun tempo registrato.",
+      "toasts": {
+        "logged": "Tempo registrato correttamente.",
+        "not_logged": "Impossibile registrare il tempo. Riprova.",
+        "updated": "Voce di tempo aggiornata.",
+        "not_updated": "Impossibile aggiornare la voce.",
+        "removed": "Voce di tempo rimossa.",
+        "not_removed": "Impossibile rimuovere la voce."
+      }
     }
   },
   "sub_work_item": {

@@ -59,6 +59,7 @@
         "issue_type": "作業項目タイプ",
         "sub_issue_count": "サブ作業項目数",
         "attachment_count": "添付ファイル数",
+        "time_tracked": "記録時間",
         "created_on": "作成日",
         "sub_issue": "サブ作業項目",
         "work_item_count": "作業項目数"
@@ -268,6 +269,20 @@
       "click_to_downvote": "クリックして反対票を投じる",
       "click_to_view_upvotes": "クリックして賛成票を表示",
       "click_to_view_downvotes": "クリックして反対票を表示"
+    },
+    "time_tracking": {
+      "log_time": "時間を記録",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "有効な時間を入力してください（例：1h 30m）。",
+      "empty": "まだ時間が記録されていません。",
+      "toasts": {
+        "logged": "時間を記録しました。",
+        "not_logged": "時間を記録できませんでした。もう一度お試しください。",
+        "updated": "時間エントリを更新しました。",
+        "not_updated": "時間エントリを更新できませんでした。",
+        "removed": "時間エントリを削除しました。",
+        "not_removed": "時間エントリを削除できませんでした。"
+      }
     }
   },
   "sub_work_item": {

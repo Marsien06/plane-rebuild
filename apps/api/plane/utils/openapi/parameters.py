@@ -240,6 +240,21 @@ ATTACHMENT_ID_PARAMETER = OpenApiParameter(
     ],
 )
 
+TIME_ENTRY_ID_PARAMETER = OpenApiParameter(
+    name="pk",
+    description="Time Entry ID",
+    required=True,
+    type=OpenApiTypes.UUID,
+    location=OpenApiParameter.PATH,
+    examples=[
+        OpenApiExample(
+            name="Example time entry ID",
+            value="550e8400-e29b-41d4-a716-446655440000",
+            description="A typical time entry UUID",
+        )
+    ],
+)
+
 ACTIVITY_ID_PARAMETER = OpenApiParameter(
     name="pk",
     description="Activity ID",

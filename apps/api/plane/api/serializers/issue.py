@@ -21,6 +21,7 @@ from plane.db.models import (
     IssueLabel,
     IssueLink,
     IssueRelation,
+    IssueTimeEntry,
     Label,
     ProjectMember,
     State,
@@ -492,6 +493,37 @@ class IssueLinkSerializer(BaseSerializer):
             "created_at",
             "updated_at",
         ]
+
+
+class IssueTimeEntrySerializer(BaseSerializer):
+    """
+    Full serializer for work item time entries.
+
+    Used for list/retrieve responses and for create/update payloads.
+    `user` stays writable so time can be attributed to a specific member;
+    when omitted it defaults to the API key's user.
+    """
+
+    user_detail = UserLiteSerializer(read_only=True, source="user")
+
+    class Meta:
+        model = IssueTimeEntry
+        fields = "__all__"
+        read_only_fields = [
+            "id",
+            "workspace",
+            "project",
+            "issue",
+            "created_by",
+            "updated_by",
+            "created_at",
+            "updated_at",
+        ]
+
+    def validate_duration_seconds(self, value):
+        if value is None or value < 1:
+            raise serializers.ValidationError("Duration must be at least 1 second.")
+        return value
 
 
 class IssueRelationRefSerializer(serializers.Serializer):

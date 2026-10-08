@@ -59,6 +59,7 @@
         "issue_type": "작업 항목 유형",
         "sub_issue_count": "하위 작업 항목 수",
         "attachment_count": "첨부 파일 수",
+        "time_tracked": "기록된 시간",
         "created_on": "생성일",
         "sub_issue": "하위 작업 항목",
         "work_item_count": "작업 항목 수"
@@ -268,6 +269,20 @@
       "click_to_downvote": "클릭하여 비추천",
       "click_to_view_upvotes": "클릭하여 추천 목록 보기",
       "click_to_view_downvotes": "클릭하여 비추천 목록 보기"
+    },
+    "time_tracking": {
+      "log_time": "시간 기록",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "유효한 기간을 입력하세요(예: 1h 30m).",
+      "empty": "아직 기록된 시간이 없습니다.",
+      "toasts": {
+        "logged": "시간이 기록되었습니다.",
+        "not_logged": "시간을 기록하지 못했습니다. 다시 시도하세요.",
+        "updated": "시간 항목이 업데이트되었습니다.",
+        "not_updated": "시간 항목을 업데이트하지 못했습니다.",
+        "removed": "시간 항목이 삭제되었습니다.",
+        "not_removed": "시간 항목을 삭제하지 못했습니다."
+      }
     }
   },
   "sub_work_item": {

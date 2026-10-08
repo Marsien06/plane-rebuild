@@ -59,6 +59,7 @@
         "issue_type": "Work item Type",
         "sub_issue_count": "Sub-work item count",
         "attachment_count": "Attachment count",
+        "time_tracked": "Time tracked",
         "created_on": "Created on",
         "sub_issue": "Sub-work item",
         "work_item_count": "Work item count"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Click to downvote",
       "click_to_view_upvotes": "Click to view upvotes",
       "click_to_view_downvotes": "Click to view downvotes"
+    },
+    "time_tracking": {
+      "log_time": "Log time",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Enter a valid duration, e.g. 1h 30m.",
+      "empty": "No time logged yet.",
+      "toasts": {
+        "logged": "Time logged successfully.",
+        "not_logged": "Could not log time. Try again.",
+        "updated": "Time entry updated.",
+        "not_updated": "Could not update the time entry.",
+        "removed": "Time entry removed.",
+        "not_removed": "Could not remove the time entry."
+      }
     }
   },
   "sub_work_item": {

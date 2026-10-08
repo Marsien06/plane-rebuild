@@ -59,6 +59,7 @@
         "issue_type": "Tipe item kerja",
         "sub_issue_count": "Jumlah sub-item kerja",
         "attachment_count": "Jumlah lampiran",
+        "time_tracked": "Waktu yang dicatat",
         "created_on": "Dibuat pada",
         "sub_issue": "Sub-item kerja",
         "work_item_count": "Jumlah item kerja"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Klik untuk memberi suara turun",
       "click_to_view_upvotes": "Klik untuk melihat suara naik",
       "click_to_view_downvotes": "Klik untuk melihat suara turun"
+    },
+    "time_tracking": {
+      "log_time": "Catat waktu",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Masukkan durasi yang valid, mis. 1h 30m.",
+      "empty": "Belum ada waktu yang dicatat.",
+      "toasts": {
+        "logged": "Waktu berhasil dicatat.",
+        "not_logged": "Tidak dapat mencatat waktu. Coba lagi.",
+        "updated": "Entri waktu diperbarui.",
+        "not_updated": "Tidak dapat memperbarui entri waktu.",
+        "removed": "Entri waktu dihapus.",
+        "not_removed": "Tidak dapat menghapus entri waktu."
+      }
     }
   },
   "sub_work_item": {

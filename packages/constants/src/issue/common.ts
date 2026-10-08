@@ -150,6 +150,7 @@ export const ISSUE_DISPLAY_PROPERTIES_KEYS: (keyof IIssueDisplayProperties)[] = 
   "sub_issue_count",
   "link",
   "attachment_count",
+  "time_tracked",
   "estimate",
   "created_on",
   "updated_on",
@@ -201,6 +202,10 @@ export const ISSUE_DISPLAY_PROPERTIES: {
     key: "attachment_count",
     titleTranslationKey: "issue.display.properties.attachment_count",
   },
+  {
+    key: "time_tracked",
+    titleTranslationKey: "issue.display.properties.time_tracked",
+  },
   { key: "link", titleTranslationKey: "common.link" },
   {
     key: "estimate",
@@ -224,6 +229,7 @@ export const SPREADSHEET_PROPERTY_LIST: (keyof IIssueDisplayProperties)[] = [
   "updated_on",
   "link",
   "attachment_count",
+  "time_tracked",
   "sub_issue_count",
 ];
 
@@ -340,6 +346,14 @@ export const SPREADSHEET_PROPERTY_DETAILS: {
     descendingOrderKey: "attachment_count",
     descendingOrderTitle: "Least",
     icon: "Paperclip",
+  },
+  time_tracked: {
+    i18n_title: "issue.display.properties.time_tracked",
+    ascendingOrderKey: "-attachment_count",
+    ascendingOrderTitle: "Most",
+    descendingOrderKey: "attachment_count",
+    descendingOrderTitle: "Least",
+    icon: "TimeTracking",
   },
   sub_issue_count: {
     i18n_title: "issue.display.properties.sub_issue",

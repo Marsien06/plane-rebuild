@@ -593,3 +593,64 @@ export const formatDuration = (seconds: number | undefined | null): string => {
  */
 export const isValidDate = (date: unknown): date is string | Date =>
   (typeof date === "string" || typeof date === "object") && date !== null && !isNaN(Date.parse(date as string));
+
+// Tracked-time helpers
+/**
+ * @returns {string} compact tracked-time label (e.g. "2h 15m", "45m", "30s")
+ * @description Formats seconds as a short "Xh Ym" label for work-item display properties
+ * @param {number} seconds - The duration in seconds
+ * @example formatTrackedTime(8100) // "2h 15m"
+ * @example formatTrackedTime(2700) // "45m"
+ * @example formatTrackedTime(30) // "30s"
+ * @example formatTrackedTime(0) // "0m"
+ */
+export const formatTrackedTime = (seconds: number | undefined | null): string => {
+  if (seconds == null || typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 0) {
+    return "0m";
+  }
+  const totalSeconds = Math.round(seconds);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  if (hours > 0) {
+    return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
+  }
+  if (minutes > 0) {
+    return `${minutes}m`;
+  }
+  return `${totalSeconds}s`;
+};
+
+/**
+ * @returns {number | null} duration in seconds, or null when the input is invalid
+ * @description Parses free-form duration input like "1h 30m", "90m", "2.5h", "45" (minutes) into seconds
+ * @param {string} input - The raw user input
+ * @example parseDurationInput("1h 30m") // 5400
+ * @example parseDurationInput("2.5h") // 9000
+ * @example parseDurationInput("45") // 2700
+ */
+export const parseDurationInput = (input: string | undefined | null): number | null => {
+  if (!input || typeof input !== "string") return null;
+  const normalized = input.trim().toLowerCase();
+  if (!normalized) return null;
+
+  const unitPattern = /(\d+(?:\.\d+)?)\s*(hours|hour|hrs|hr|h|minutes|minute|mins|min|m|seconds|second|secs|sec|s)?/g;
+  let totalSeconds = 0;
+  let matched = false;
+  for (const match of normalized.matchAll(unitPattern)) {
+    const value = parseFloat(match[1]);
+    const unit = match[2] ?? "m";
+    if (!Number.isFinite(value)) return null;
+    matched = true;
+    if (unit.startsWith("h")) totalSeconds += value * 3600;
+    else if (unit.startsWith("m")) totalSeconds += value * 60;
+    else totalSeconds += value;
+  }
+  // reject inputs with leftover characters (e.g. "1x", "abc")
+  const stripped = normalized.replace(
+    /[\d.\s]*(hours|hour|hrs|hr|h|minutes|minute|mins|min|m|seconds|second|secs|sec|s)?/g,
+    ""
+  );
+  if (!matched || stripped.trim().length > 0) return null;
+  const rounded = Math.round(totalSeconds);
+  return rounded > 0 ? rounded : null;
+};

@@ -59,6 +59,7 @@
         "issue_type": "Tipul activității",
         "sub_issue_count": "Număr de sub-activități",
         "attachment_count": "Număr de atașamente",
+        "time_tracked": "Timp înregistrat",
         "created_on": "Creată la",
         "sub_issue": "Sub-activitate",
         "work_item_count": "Număr de activități"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Clic pentru a vota negativ",
       "click_to_view_upvotes": "Clic pentru a vedea voturile pozitive",
       "click_to_view_downvotes": "Clic pentru a vedea voturile negative"
+    },
+    "time_tracking": {
+      "log_time": "Înregistrează timp",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Introduceți o durată validă, ex. 1h 30m.",
+      "empty": "Niciun timp înregistrat încă.",
+      "toasts": {
+        "logged": "Timp înregistrat cu succes.",
+        "not_logged": "Timpul nu a putut fi înregistrat. Încercați din nou.",
+        "updated": "Înregistrare de timp actualizată.",
+        "not_updated": "Înregistrarea nu a putut fi actualizată.",
+        "removed": "Înregistrare de timp ștearsă.",
+        "not_removed": "Înregistrarea nu a putut fi ștearsă."
+      }
     }
   },
   "sub_work_item": {

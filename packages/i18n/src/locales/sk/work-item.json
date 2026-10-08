@@ -59,6 +59,7 @@
         "issue_type": "Typ pracovnej položky",
         "sub_issue_count": "Počet podriadených položiek",
         "attachment_count": "Počet príloh",
+        "time_tracked": "Zaznamenaný čas",
         "created_on": "Vytvorené dňa",
         "sub_issue": "Podriadená položka",
         "work_item_count": "Počet pracovných položiek"
@@ -268,6 +269,20 @@
       "click_to_downvote": "Kliknite pre hlasovanie dole",
       "click_to_view_upvotes": "Kliknite pre zobrazenie hlasov hore",
       "click_to_view_downvotes": "Kliknite pre zobrazenie hlasov dole"
+    },
+    "time_tracking": {
+      "log_time": "Zaznamenať čas",
+      "duration_placeholder": "1h 30m",
+      "invalid_duration": "Zadajte platný čas, napr. 1h 30m.",
+      "empty": "Zatiaľ nebol zaznamenaný žiadny čas.",
+      "toasts": {
+        "logged": "Čas bol úspešne zaznamenaný.",
+        "not_logged": "Čas sa nepodarilo zaznamenať. Skúste to znova.",
+        "updated": "Záznam času bol aktualizovaný.",
+        "not_updated": "Záznam sa nepodarilo aktualizovať.",
+        "removed": "Záznam času bol odstránený.",
+        "not_removed": "Záznam sa nepodarilo odstrániť."
+      }
     }
   },
   "sub_work_item": {
